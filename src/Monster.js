@@ -19,12 +19,13 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
         scene.load.animation(anim_name, anim_json)
     }
 
+
+
     get velocity() {
         return this.body.velocity;
     }
 
     update() {
-
         const speed = 0.5;
         let monsterVelocity = new Phaser.Math.Vector2();
 
@@ -32,9 +33,9 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
         monsterVelocity.scale(speed);
         this.setVelocity(monsterVelocity.x, monsterVelocity.y)
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
-            this.anims.play('bandit_walk', true)
+            this.anims.play(this.texture.key + '_walk', true)
         } else {
-            this.anims.play('bandit_idle', true)
+            this.anims.play(this.texture.key + '_idle', true)
         }
     }
 }
