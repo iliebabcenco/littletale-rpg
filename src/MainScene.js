@@ -1,3 +1,4 @@
+import Monster from "./Monster";
 import Player from "./Player";
 
 export default class MainScene extends Phaser.Scene {
@@ -7,6 +8,7 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
+        Monster.preload(this, 'bandit', '../assets/monsters/bandit.png', '../assets/monsters/bandit_atlas.json')
         this.load.image('tiles', '../assets/textures/summer.png')
         this.load.tilemapTiledJSON('map', '../assets/textures/map.json')
     }
@@ -21,6 +23,7 @@ export default class MainScene extends Phaser.Scene {
         layer2.setCollisionByProperty({ colides: true })
         this.matter.world.convertTilemapLayer(layer2)
 
+        this.monster = new Monster({ scene: this, x: 100, y: 290, texture: 'bandit', frame: 'bandit_idle_1' });
         this.player = new Player({ scene: this, x: 65, y: 290, texture: 'mainchar', frame: 'herald_idle_1' });
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,

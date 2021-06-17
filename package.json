@@ -34,5 +34,8 @@
     "stylelint-scss": "^3.19.0",
     "webpack": "^5.39.1",
     "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "phaser": "^3.55.2"
   }
 }
