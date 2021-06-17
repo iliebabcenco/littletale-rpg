@@ -15,8 +15,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     static preload(scene) {
-        scene.load.atlas('mainchar', 'assets/images/mainchar.png', 'assets/images/mainchar_atlas.json')
-        scene.load.animation('mainchar_anim', 'assets/images/mainchar_anim.json')
+        scene.load.atlas('mainchar', '../assets/maincharacter/mainchar.png', '../assets/maincharacter/mainchar_atlas.json')
+        scene.load.animation('mainchar_anim', '../assets/maincharacter/mainchar_anim.json')
     }
 
     get velocity() {

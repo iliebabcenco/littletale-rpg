@@ -1,4 +1,4 @@
-import Player from "./Player.js";
+import Player from "./Player";
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -7,10 +7,8 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
-        this.load.image('tiles', 'assets/images/textures/summer.png')
-        this.load.tilemapTiledJSON('map', 'assets/images/textures/map.json')
-
-
+        this.load.image('tiles', '../assets/textures/summer.png')
+        this.load.tilemapTiledJSON('map', '../assets/textures/map.json')
     }
 
     create() {

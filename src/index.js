@@ -1,8 +1,8 @@
-import MainScene from "./MainScene.js";
+import MainScene from "./MainScene";
 
 const config = {
-    width: 600,
-    height: 512,
+    width: 1200,
+    height: 800,
     backgroundColor: '#999999',
     type: Phaser.AUTO,
     parent: 'survival-game',
