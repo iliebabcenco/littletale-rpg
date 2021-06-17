@@ -8,7 +8,7 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
-        Monster.preload(this, 'bandit', '../assets/monsters/bandit.png', '../assets/monsters/bandit_atlas.json')
+        Monster.preload(this, 'bandit', '../assets/monsters/bandit.png', '../assets/monsters/bandit_atlas.json', 'bandit_anim', '../assets/monsters/bandit_anim.json')
         this.load.image('tiles', '../assets/textures/summer.png')
         this.load.tilemapTiledJSON('map', '../assets/textures/map.json')
     }
@@ -23,8 +23,12 @@ export default class MainScene extends Phaser.Scene {
         layer2.setCollisionByProperty({ colides: true })
         this.matter.world.convertTilemapLayer(layer2)
 
-        this.monster = new Monster({ scene: this, x: 100, y: 290, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit1 = new Monster({ scene: this, x: 500, y: 65, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit2 = new Monster({ scene: this, x: 510, y: 75, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit3 = new Monster({ scene: this, x: 500, y: 85, texture: 'bandit', frame: 'bandit_idle_1' });
+
         this.player = new Player({ scene: this, x: 65, y: 290, texture: 'mainchar', frame: 'herald_idle_1' });
+
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
             down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -35,6 +39,9 @@ export default class MainScene extends Phaser.Scene {
 
     update() {
         this.player.update()
+        this.bandit1.update()
+        this.bandit2.update()
+        this.bandit3.update()
     }
 
 }
