@@ -3,6 +3,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         let { scene, x, y, texture, frame } = data;
         super(scene.matter.world, x, y, texture, frame)
         this.scene.add.existing(this)
+        this.displayWidth = 100
+        this.displayHeight = 100
         const { Body, Bodies } = Phaser.Physics.Matter.Matter
         let playerCollider = Bodies.circle(this.x, this.y, 12, { isSensor: false, label: 'playerCollider' })
         let playerSensor = Bodies.circle(this.x, this.y, 24, { isSensor: true, label: 'playerSensor' })
@@ -10,13 +12,23 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
             parts: [playerCollider, playerSensor],
             frictionAir: 0.25,
         })
+        this.inputKeys = this.scene.input.keyboard.addKeys({
+            up: Phaser.Input.Keyboard.KeyCodes.W,
+            down: Phaser.Input.Keyboard.KeyCodes.S,
+            left: Phaser.Input.Keyboard.KeyCodes.A,
+            right: Phaser.Input.Keyboard.KeyCodes.D,
+            attack: Phaser.Input.Keyboard.KeyCodes.SPACE
+        })
         this.setExistingBody(compoundBody)
         this.setFixedRotation()
+
     }
 
     static preload(scene) {
-        scene.load.atlas('mainchar', '../assets/maincharacter/mainchar.png', '../assets/maincharacter/mainchar_atlas.json')
-        scene.load.animation('mainchar_anim', '../assets/maincharacter/mainchar_anim.json')
+        // scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
+        // scene.load.animation('mainchar_anim', '../assets/maincharacter/mainchar_anim.json')
+        scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
+        scene.load.animation('mainchar_anim', '../assets/maincharacter/main/mainchar_anim.json')
     }
 
     get velocity() {
@@ -24,6 +36,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     update() {
+
+
 
         const speed = 2.5;
         let playerVelocity = new Phaser.Math.Vector2();
@@ -45,5 +59,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         } else {
             this.anims.play('mainchar_idle', true)
         }
+        // if (this.inputKeys.attack.isDown) {
+        //     this.anims.play('mainchar_attack', true)
+        // } else {
+        //     this.anims.play('mainchar_idle', true)
+        // }
     }
 }
