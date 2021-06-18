@@ -6,7 +6,6 @@ import PreloaderScene from './scenes/PreloaderScene';
 import TitleScene from './scenes/TitleScene';
 import OptionsScene from './scenes/OptionsScene';
 import CreditsScene from './scenes/CreditsScene';
-import GameScene from './scenes/GameScene';
 import Model from './Classes/Model';
 
 
@@ -25,16 +24,10 @@ class Game extends Phaser.Game {
         console.log('Credits scene loaded')
         this.scene.add('Main', MainScene);
         console.log('Main scene loaded')
-        this.scene.add('Game', GameScene);
-        console.log('Game scene loaded')
         this.scene.start('Boot');
-
         const model = new Model();
         this.globals = { model, bgMusic: null };
     }
 }
 
 window.game = new Game();
-
-
-// new Phaser.Game(config);

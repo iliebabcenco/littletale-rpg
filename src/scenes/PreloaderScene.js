@@ -4,6 +4,8 @@ import blueButton1Img from '../../assets/ui/blue_button02.png';
 import blueButton2Img from '../../assets/ui/blue_button03.png';
 import boxImg from '../../assets/ui/grey_box.png';
 import checkedBoxImg from '../../assets/ui/blue_boxCheckmark.png';
+import playMusic from '../../assets/ui/volume.png';
+import muteMusic from '../../assets/ui/mute.png';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -15,10 +17,12 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    // add logo image
+    this.load.image('blueButton1', blueButton1Img);
+    this.load.image('blueButton2', blueButton2Img);
+    this.load.image('tiles', '../assets/textures/summer.png')
+    this.load.tilemapTiledJSON('map', '../assets/textures/map.json')
     this.add.image(380, 250, 'backgroundImg');
 
-    // display progress bar
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
@@ -87,6 +91,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('backgroundImg', backgroundImg)
     this.load.image('blueButton1', blueButton1Img);
     this.load.image('blueButton2', blueButton2Img);
+    this.load.image('playMusic', playMusic);
+    this.load.image('muteMusic', muteMusic);
     this.load.image('box', boxImg);
     this.load.image('checkedBox', checkedBoxImg);
     this.load.audio('bgMusic', ['assets/TownTheme.mp3']);

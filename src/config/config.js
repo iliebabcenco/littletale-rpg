@@ -2,13 +2,15 @@ import Phaser from 'phaser';
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
 
 export default {
-    width: 700,
+    width: 800,
     height: 600,
-    backgroundImg: '../../assets/background.png',
     type: Phaser.AUTO,
     parent: 'survival-game',
+
     scale: {
-        zoom: 2,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+
     },
     physics: {
         default: 'matter',
