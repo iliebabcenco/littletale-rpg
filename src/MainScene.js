@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import Monster from "./Monster";
 import Player from "./Player";
 

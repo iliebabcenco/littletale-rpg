@@ -1,4 +1,7 @@
+import Phaser from 'phaser';
+import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
 import MainScene from "./MainScene";
+
 
 const config = {
     width: 1200,

@@ -36,6 +36,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "phaser": "^3.55.2"
+    "phaser": "^3.50.0",
+    "phaser-matter-collision-plugin": "^0.10.2"
   }
 }
