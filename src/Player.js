@@ -36,9 +36,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     update() {
-
-
-
         const speed = 2.5;
         let playerVelocity = new Phaser.Math.Vector2();
         if (this.inputKeys.left.isDown) {
@@ -56,13 +53,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.setVelocity(playerVelocity.x, playerVelocity.y)
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
             this.anims.play('mainchar_walk', true)
-        } else {
+        } else if (this.inputKeys.attack.isDown) {
+            this.anims.play('mainchar_attack', true)
+        }
+        else {
             this.anims.play('mainchar_idle', true)
         }
-        // if (this.inputKeys.attack.isDown) {
-        //     this.anims.play('mainchar_attack', true)
-        // } else {
-        //     this.anims.play('mainchar_idle', true)
-        // }
+
     }
 }

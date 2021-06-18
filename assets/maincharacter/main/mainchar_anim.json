@@ -157,10 +157,6 @@
                 {
                     "key": "mainchar",
                     "frame": "attack_7"
-                },
-                {
-                    "key": "mainchar",
-                    "frame": "death_1"
                 }
             ]
         }
