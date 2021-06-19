@@ -2,9 +2,6 @@ import Phaser from 'phaser';
 import Monster from "../Monster";
 import Player from "../Player";
 import Button from '../objects/Button';
-import blueButton1Img from '../../assets/ui/blue_button02.png';
-import blueButton2Img from '../../assets/ui/blue_button03.png';
-import OptionsScene from './OptionsScene';
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -21,6 +18,8 @@ export default class MainScene extends Phaser.Scene {
     }
 
     create() {
+
+        const monsters = []
         this.model = this.sys.game.globals.model;
         const map = this.make.tilemap({ key: 'map' });
         const tileset = map.addTilesetImage('summer', 'tiles', 32, 32)
@@ -45,8 +44,13 @@ export default class MainScene extends Phaser.Scene {
         this.updateAudio();
 
         this.bandit1 = new Monster({ scene: this, x: 500, y: 65, texture: 'bandit', frame: 'bandit_idle_1' });
+        monsters.push(this.bandit1)
+
+
         this.bandit2 = new Monster({ scene: this, x: 510, y: 75, texture: 'bandit', frame: 'bandit_idle_1' });
+        monsters.push(this.bandit2)
         this.bandit3 = new Monster({ scene: this, x: 500, y: 85, texture: 'bandit', frame: 'bandit_idle_1' });
+        monsters.push(this.bandit3)
 
         this.mushroom1 = new Monster({ scene: this, x: 300, y: 75, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
         this.mushroom2 = new Monster({ scene: this, x: 325, y: 225, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
@@ -55,15 +59,32 @@ export default class MainScene extends Phaser.Scene {
         this.mushroom5 = new Monster({ scene: this, x: 40, y: 500, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
         this.mushroom6 = new Monster({ scene: this, x: 310, y: 330, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
 
+        monsters.push(this.mushroom1)
+        monsters.push(this.mushroom2)
+        monsters.push(this.mushroom3)
+        monsters.push(this.mushroom4)
+        monsters.push(this.mushroom5)
+        monsters.push(this.mushroom6)
+
         this.gnoll1 = new Monster({ scene: this, x: 380, y: 480, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
         this.gnoll2 = new Monster({ scene: this, x: 485, y: 400, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
         this.gnoll3 = new Monster({ scene: this, x: 550, y: 185, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
         this.gnoll4 = new Monster({ scene: this, x: 500, y: 285, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
+        monsters.push(this.gnoll1)
+        monsters.push(this.gnoll2)
+        monsters.push(this.gnoll3)
+        monsters.push(this.gnoll4)
 
         this.golem1 = new Monster({ scene: this, x: 550, y: 550, texture: 'golem', frame: 'golem_idle_1' });
         this.golem2 = new Monster({ scene: this, x: 220, y: 550, texture: 'golem', frame: 'golem_idle_1' });
+        monsters.push(this.golem1)
+        monsters.push(this.golem2)
 
         this.player = new Player({ scene: this, x: 65, y: 290, texture: 'mainchar', frame: 'idle_1' });
+
+        monsters.forEach((monster) => {
+            this.time.addEvent({ delay: Math.random() * (5000 - 3000) + 3000, callback: monster.changeVelocity, callbackScope: monster, loop: true });
+        })
 
 
     }

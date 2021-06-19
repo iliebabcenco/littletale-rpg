@@ -5,6 +5,12 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene.add.existing(this)
         this.displayWidth = 100
         this.displayHeight = 100
+
+        this.hp = 300
+        this.experience = 0
+        this.level = Math.round(((Math.sqrt(250 + 20 * this.experience) - 5) / 10)) //mushroom = 10 exp
+        this.power = (this.level * 25) - 10
+
         const { Body, Bodies } = Phaser.Physics.Matter.Matter
         let playerCollider = Bodies.circle(this.x, this.y, 12, { isSensor: false, label: 'playerCollider' })
         let playerSensor = Bodies.circle(this.x, this.y, 24, { isSensor: true, label: 'playerSensor' })

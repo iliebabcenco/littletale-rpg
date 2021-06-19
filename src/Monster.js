@@ -12,30 +12,37 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
         })
         this.setExistingBody(compoundBody)
         this.setFixedRotation()
+
     }
 
     static preload(scene, name, image, atlas_json, anim_name, anim_json) {
         scene.load.atlas(name, image, atlas_json)
         scene.load.animation(anim_name, anim_json)
+
     }
-
-
 
     get velocity() {
         return this.body.velocity;
     }
 
     update() {
-        const speed = 0.5;
-        let monsterVelocity = new Phaser.Math.Vector2();
-
-        monsterVelocity.normalize(1)
-        monsterVelocity.scale(speed);
-        this.setVelocity(monsterVelocity.x, monsterVelocity.y)
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
             this.anims.play(this.texture.key + '_walk', true)
         } else {
             this.anims.play(this.texture.key + '_idle', true)
         }
+
+    }
+
+
+    changeVelocity() {
+        const speed = 2.5;
+        let monsterVelocity = new Phaser.Math.Vector2();
+        monsterVelocity.x = Math.random() < 0.5 ? -4 : 4
+        monsterVelocity.y = Math.random() < 0.5 ? -4 : 4
+        monsterVelocity.normalize(1)
+        monsterVelocity.scale(speed);
+        this.setVelocity(monsterVelocity.x, monsterVelocity.y)
+
     }
 }
