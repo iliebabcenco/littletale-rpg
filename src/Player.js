@@ -1,3 +1,5 @@
+import { Game } from "phaser";
+
 export default class Player extends Phaser.Physics.Matter.Sprite {
     constructor(data) {
         let { scene, x, y, texture, frame } = data;
@@ -6,10 +8,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.displayWidth = 100
         this.displayHeight = 100
 
-        this.hp = 300
         this.experience = 0
-        this.level = Math.round(((Math.sqrt(250 + 20 * this.experience) - 5) / 10)) //mushroom = 10 exp
-        this.power = (this.level * 25) - 10
+        this.level = Math.round(((Math.sqrt(25 + 10 * this.experience) - 5) / 10))
+        this.power = (this.level * 1.05) + 15
+        this.hp = 300 + this.level * 10
 
         const { Body, Bodies } = Phaser.Physics.Matter.Matter
         let playerCollider = Bodies.circle(this.x, this.y, 12, { isSensor: false, label: 'playerCollider' })
@@ -30,13 +32,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     }
 
-    create() {
-        this.scene.text = this.scene.add.text(300, 100, 'Lvl: ' + this.level, { fontSize: 40 });
-    }
     static preload(scene) {
-        // scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
-        // scene.load.animation('mainchar_anim', '../assets/maincharacter/mainchar_anim.json')
-
         scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
         scene.load.animation('mainchar_anim', '../assets/maincharacter/main/mainchar_anim.json')
     }
@@ -67,15 +63,42 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
             this.anims.play('mainchar_walk', true)
-            this.scene.text = this.scene.add.text(this.x - 20, this.y - 30, 'Lvl: ' + this.level, { fontSize: 12 });
+            this.scene.text = this.scene.add.text(this.x - 40, this.y - 30, 'Lvl: ' + this.level + ' HP: ' + this.hp, { fontSize: 12 });
         } else if (this.inputKeys.attack.isDown) {
             this.anims.play('mainchar_attack', true)
+            this.scene.monsters.forEach(monster => {
+                if (Math.abs(this.x - monster.x) < 40 && Math.abs(this.y - monster.y) < 40) {
+                    monster.stats.hp = monster.stats.hp - this.power
+                    if (monster.stats.hp <= 0) {
+                        this.experience += monster.stats.exp
+                        this.scene.timeEvents[this.scene.monsters.indexOf(monster)].remove(false)
+                        this.scene.timeEvents.splice(this.scene.monsters.indexOf(monster), 1)
+                        this.scene.monsters.splice(this.scene.monsters.indexOf(monster), 1)
+                        monster.followText.destroy()
+                        monster.destroy()
+                        let currentLevel = this.level
+                        this.level = Math.round(((Math.sqrt(250 + 20 * this.experience) - 5) / 10))
+                        if (currentLevel < this.level) {
+                            this.power = (this.level * 1.05)
+                            this.hp = 300 + this.level * 10
+                        }
+
+                    }
+
+                }
+
+            });
         }
         else {
-            this.scene.text = this.scene.add.text(this.x - 20, this.y - 30, 'Lvl: ' + this.level, { fontSize: 12 });
+            this.scene.text = this.scene.add.text(this.x - 40, this.y - 30, 'Lvl: ' + this.level + ' HP: ' + this.hp, { fontSize: 12 });
             this.anims.play('mainchar_idle', true)
         }
+    }
 
+    gameOver() {
+        this.anims.play('mainchar_death', true)
+
+        this.scene.text = this.scene.add.text(200, 300, 'Game over!', { fontSize: 36 });
 
     }
 }

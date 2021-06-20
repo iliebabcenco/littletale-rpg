@@ -33,6 +33,7 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
 
         if (this.followText != null && this.followText != undefined) {
             this.followText.setPosition(this.x - 20, this.y - 20);
+            this.followText.setText('HP: ' + this.stats.hp);
         }
 
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
@@ -40,18 +41,34 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
         } else {
             this.anims.play(this.texture.key + '_idle', true)
         }
-
+        let player = this.scene.player
+        if (Math.abs(this.x - player.x) < 75 && Math.abs(this.y - player.y) < 75) {
+            if (this.x > player.x + 20 && this.y > player.y + 20) {
+                this.changeVelocity(-1, -1)
+            } else if (this.x < player.x + 20 && this.y > player.y + 20) {
+                this.changeVelocity(1, -1)
+            } else if (this.x < player.x + 20 && this.y < player.y + 20) {
+                this.changeVelocity(1, 1)
+            } else if (this.x > player.x + 20 && this.y < player.y + 20) {
+                this.changeVelocity(-1, 1)
+            }
+        }
+        if (Math.abs(this.x - player.x) < 20 && Math.abs(this.y - player.y) < 20) {
+            if (player.hp <= 0) {
+                player.gameOver()
+            }
+            player.hp -= this.stats.power
+        }
 
     }
 
-    changeVelocity() {
-        const speed = 2.5;
+    changeVelocity(x = Math.random() < 0.5 ? -4 : 4, y = Math.random() < 0.5 ? -4 : 4) {
+        const speed = 1;
         let monsterVelocity = new Phaser.Math.Vector2();
-        monsterVelocity.x = Math.random() < 0.5 ? -4 : 4
-        monsterVelocity.y = Math.random() < 0.5 ? -4 : 4
+        monsterVelocity.x = x
+        monsterVelocity.y = y
         monsterVelocity.normalize(1)
         monsterVelocity.scale(speed);
         this.setVelocity(monsterVelocity.x, monsterVelocity.y)
-        // this.changeHp(this.x, this.y)
     }
 }
