@@ -30,9 +30,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     }
 
+    create() {
+        this.scene.text = this.scene.add.text(300, 100, 'Lvl: ' + this.level, { fontSize: 40 });
+    }
     static preload(scene) {
         // scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
         // scene.load.animation('mainchar_anim', '../assets/maincharacter/mainchar_anim.json')
+
         scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json')
         scene.load.animation('mainchar_anim', '../assets/maincharacter/main/mainchar_anim.json')
     }
@@ -43,6 +47,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     update() {
         const speed = 2.5;
+        if (this.scene.text != null) {
+            this.scene.text.destroy()
+        }
         let playerVelocity = new Phaser.Math.Vector2();
         if (this.inputKeys.left.isDown) {
             playerVelocity.x = -1
@@ -57,14 +64,18 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         playerVelocity.normalize(1)
         playerVelocity.scale(speed);
         this.setVelocity(playerVelocity.x, playerVelocity.y)
+
         if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
             this.anims.play('mainchar_walk', true)
+            this.scene.text = this.scene.add.text(this.x - 20, this.y - 30, 'Lvl: ' + this.level, { fontSize: 12 });
         } else if (this.inputKeys.attack.isDown) {
             this.anims.play('mainchar_attack', true)
         }
         else {
+            this.scene.text = this.scene.add.text(this.x - 20, this.y - 30, 'Lvl: ' + this.level, { fontSize: 12 });
             this.anims.play('mainchar_idle', true)
         }
+
 
     }
 }

@@ -19,6 +19,12 @@ export default class MainScene extends Phaser.Scene {
 
     create() {
 
+
+        const mushroomStats = { hp: 150, power: 15, exp: 150 }
+        const banditStats = { hp: 200, power: 20, exp: 200 }
+        const gnollStats = { hp: 175, power: 50, exp: 175 }
+        const golemStats = { hp: 1500, power: 100, exp: 1500 }
+
         const monsters = []
         this.model = this.sys.game.globals.model;
         const map = this.make.tilemap({ key: 'map' });
@@ -43,21 +49,21 @@ export default class MainScene extends Phaser.Scene {
 
         this.updateAudio();
 
-        this.bandit1 = new Monster({ scene: this, x: 500, y: 65, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit1 = new Monster({ scene: this, x: 500, y: 65, texture: 'bandit', frame: 'bandit_idle_1' }, banditStats);
         monsters.push(this.bandit1)
 
 
-        this.bandit2 = new Monster({ scene: this, x: 510, y: 75, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit2 = new Monster({ scene: this, x: 510, y: 75, texture: 'bandit', frame: 'bandit_idle_1' }, banditStats);
         monsters.push(this.bandit2)
-        this.bandit3 = new Monster({ scene: this, x: 500, y: 85, texture: 'bandit', frame: 'bandit_idle_1' });
+        this.bandit3 = new Monster({ scene: this, x: 500, y: 85, texture: 'bandit', frame: 'bandit_idle_1' }, banditStats);
         monsters.push(this.bandit3)
 
-        this.mushroom1 = new Monster({ scene: this, x: 300, y: 75, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
-        this.mushroom2 = new Monster({ scene: this, x: 325, y: 225, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
-        this.mushroom3 = new Monster({ scene: this, x: 110, y: 380, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
-        this.mushroom4 = new Monster({ scene: this, x: 225, y: 300, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
-        this.mushroom5 = new Monster({ scene: this, x: 40, y: 500, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
-        this.mushroom6 = new Monster({ scene: this, x: 310, y: 330, texture: 'mushroom', frame: 'normalmushroom_idle_1' });
+        this.mushroom1 = new Monster({ scene: this, x: 300, y: 75, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
+        this.mushroom2 = new Monster({ scene: this, x: 325, y: 225, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
+        this.mushroom3 = new Monster({ scene: this, x: 110, y: 380, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
+        this.mushroom4 = new Monster({ scene: this, x: 225, y: 300, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
+        this.mushroom5 = new Monster({ scene: this, x: 40, y: 500, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
+        this.mushroom6 = new Monster({ scene: this, x: 310, y: 330, texture: 'mushroom', frame: 'normalmushroom_idle_1' }, mushroomStats);
 
         monsters.push(this.mushroom1)
         monsters.push(this.mushroom2)
@@ -66,17 +72,18 @@ export default class MainScene extends Phaser.Scene {
         monsters.push(this.mushroom5)
         monsters.push(this.mushroom6)
 
-        this.gnoll1 = new Monster({ scene: this, x: 380, y: 480, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
-        this.gnoll2 = new Monster({ scene: this, x: 485, y: 400, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
-        this.gnoll3 = new Monster({ scene: this, x: 550, y: 185, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
-        this.gnoll4 = new Monster({ scene: this, x: 500, y: 285, texture: 'gnoll', frame: 'gnollbrute_idle_1' });
+        this.gnoll1 = new Monster({ scene: this, x: 380, y: 480, texture: 'gnoll', frame: 'gnollbrute_idle_1' }, gnollStats);
+        this.gnoll2 = new Monster({ scene: this, x: 485, y: 400, texture: 'gnoll', frame: 'gnollbrute_idle_1' }, gnollStats);
+        this.gnoll3 = new Monster({ scene: this, x: 550, y: 185, texture: 'gnoll', frame: 'gnollbrute_idle_1' }, gnollStats);
+        this.gnoll4 = new Monster({ scene: this, x: 500, y: 285, texture: 'gnoll', frame: 'gnollbrute_idle_1' }, gnollStats);
+        // console.log(this.gnoll1.stats.hp)
         monsters.push(this.gnoll1)
         monsters.push(this.gnoll2)
         monsters.push(this.gnoll3)
         monsters.push(this.gnoll4)
 
-        this.golem1 = new Monster({ scene: this, x: 550, y: 550, texture: 'golem', frame: 'golem_idle_1' });
-        this.golem2 = new Monster({ scene: this, x: 220, y: 550, texture: 'golem', frame: 'golem_idle_1' });
+        this.golem1 = new Monster({ scene: this, x: 550, y: 550, texture: 'golem', frame: 'golem_idle_1' }, golemStats);
+        this.golem2 = new Monster({ scene: this, x: 220, y: 550, texture: 'golem', frame: 'golem_idle_1' }, golemStats);
         monsters.push(this.golem1)
         monsters.push(this.golem2)
 
@@ -84,6 +91,7 @@ export default class MainScene extends Phaser.Scene {
 
         monsters.forEach((monster) => {
             this.time.addEvent({ delay: Math.random() * (5000 - 3000) + 3000, callback: monster.changeVelocity, callbackScope: monster, loop: true });
+            // this.time.addEvent({ delay: Math.random() * (5000 - 3000) + 3000, callback: monster.changeHp, callbackScope: monster, loop: true });
         })
 
 

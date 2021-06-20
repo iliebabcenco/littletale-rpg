@@ -13,6 +13,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
+
     // Title
     this.titleText = this.add.text(this.scale.width / 2, this.scale.height / 7,
       'Little Tale RPG', { fontSize: '64px', fill: '#fff' });
@@ -30,7 +31,7 @@ export default class TitleScene extends Phaser.Scene {
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
       this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-      this.bgMusic.play();
+      // this.bgMusic.play(); uncomment for music play
       this.model.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
     }

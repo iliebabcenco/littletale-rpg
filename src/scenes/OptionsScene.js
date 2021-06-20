@@ -11,6 +11,7 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   create() {
+
     this.model = this.sys.game.globals.model;
 
     this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
