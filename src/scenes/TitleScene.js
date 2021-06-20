@@ -1,4 +1,3 @@
-
 import Phaser from 'phaser';
 import Button from '../objects/Button';
 import config from '../config/config';
@@ -13,7 +12,6 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-
     // Title
     this.titleText = this.add.text(this.scale.width / 2, this.scale.height / 7,
       'Little Tale RPG', { fontSize: '64px', fill: '#fff' });
@@ -36,5 +34,4 @@ export default class TitleScene extends Phaser.Scene {
       this.sys.game.globals.bgMusic = this.bgMusic;
     }
   }
-
-};
+}

@@ -19,8 +19,8 @@ export default class PreloaderScene extends Phaser.Scene {
   preload() {
     this.load.image('blueButton1', blueButton1Img);
     this.load.image('blueButton2', blueButton2Img);
-    this.load.image('tiles', '../assets/textures/summer.png')
-    this.load.tilemapTiledJSON('map', '../assets/textures/map.json')
+    this.load.image('tiles', '../assets/textures/summer.png');
+    this.load.tilemapTiledJSON('map', '../assets/textures/map.json');
     this.add.image(380, 250, 'backgroundImg');
 
     const progressBar = this.add.graphics();
@@ -88,7 +88,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(4000, this.ready, [], this);
 
-    this.load.image('backgroundImg', backgroundImg)
+    this.load.image('backgroundImg', backgroundImg);
     this.load.image('blueButton1', blueButton1Img);
     this.load.image('blueButton2', blueButton2Img);
     this.load.image('playMusic', playMusic);
@@ -104,4 +104,4 @@ export default class PreloaderScene extends Phaser.Scene {
       this.scene.start('Title');
     }
   }
-};
+}
