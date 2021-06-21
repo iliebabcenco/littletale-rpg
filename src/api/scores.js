@@ -1,61 +1,50 @@
-const data = { name: 'Little Tale RPG' };
-let id = ""
+const fetch = require('node-fetch');
 
-const setGame = fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    mode: 'cors',
-})
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success 1:', data);
-        id = data.result.split(" ")[3]
-        return id;
-    }).catch(err => console.error("Error getting data: " + err))
+const getTopScores = (object) => {
+    const arr = [];
+    for (let i = 0; i < object.length; i += 1) {
+        arr.push([object[i].user, object[i].score]);
+    }
+    const sortedArr = Array.from(arr).sort((a, b) => b[1] - a[1]);
+    return sortedArr.slice(0, 10);
+};
 
-const addScore = (name, score) => {
-    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/SRxeGp2FFCVlaqwGJEgs/scores/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "user": name,
-            "score": score
-        }),
-        mode: 'cors',
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success 1:', data);
-            id = data.result.split(" ")[3]
-            return id;
-        }).catch(err => console.error("Error getting data: " + err))
+
+const addScore = async (name, score, id = 'SRxeGp2FFCVlaqwGJEgs') => {
+    try {
+        const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "user": name,
+                "score": score
+            }),
+            // mode: 'cors',
+        })
+        return list = await response.json()
+
+    } catch (err) {
+        return "Error getting data: " + err
+    }
 }
 
-addScore("John Doe", 15)
-addScore("Fedot Andrei", 25)
-addScore("Fedot Andrei", 13)
-
-const getScores = () => {
-    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/SRxeGp2FFCVlaqwGJEgs/scores/', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success 2:', data);
-            // id = data.result.split(" ")[3]
-            // return id;
-        }).catch(err => console.error("Error getting data: " + err))
+const getScores = async (id = 'SRxeGp2FFCVlaqwGJEgs') => {
+    try {
+        const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            // mode: 'cors',
+        })
+        const answer = await response.json()
+        return getTopScores(answer)
+    } catch (error) {
+        return error
+    }
 }
-getScores()
-//id = SRxeGp2FFCVlaqwGJEgs 
 
-export { addScore }
+export { addScore, getScores }
