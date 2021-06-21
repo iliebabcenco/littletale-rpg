@@ -6,6 +6,9 @@ export default {
   height: 600,
   type: Phaser.AUTO,
   parent: 'survival-game',
+  dom: {
+    createContainer: true,
+  },
 
   scale: {
     mode: Phaser.Scale.FIT,
@@ -15,7 +18,7 @@ export default {
   physics: {
     default: 'matter',
     matter: {
-      debug: true,
+      debug: false,
       gravity: { y: 0 },
     },
   },

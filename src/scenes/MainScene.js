@@ -2,7 +2,8 @@ import Phaser from 'phaser';
 import Monster from '../Monster';
 import Player from '../Player';
 import Button from '../objects/Button';
-import { addScore, getScores } from '../api/scores'
+import { getName } from '../util/PlayerNameUtil'
+import { addScore } from '../api/scores'
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -133,7 +134,7 @@ export default class MainScene extends Phaser.Scene {
 
         this.player = new Player({
             scene: this, x: 65, y: 290, texture: 'mainchar', frame: 'idle_1',
-        });
+        }, getName());
         this.player.setOnCollide();
         this.monsters.forEach((monster) => {
             if (monster !== undefined) {
@@ -182,6 +183,15 @@ export default class MainScene extends Phaser.Scene {
         this.gameOverText.visible = true
         this.gameRestart.visible = true
         this.scene.pause()
-        // addScore("new name", this.player.experience)
+        this.monsters.forEach((monster) => {
+            monster.destroy();
+        });
+        this.player.destroy()
+
+        const scoringCall = async () => await addScore(this.player.name, this.player.experience)
+
+        scoringCall()
+        setTimeout(this.scene.start('LeaderBoard'), 5000)
+
     }
 }

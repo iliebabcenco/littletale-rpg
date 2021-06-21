@@ -1,6 +1,6 @@
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
-  constructor(data) {
+  constructor(data, name = "unnamed") {
     const {
       scene, x, y, texture, frame,
     } = data;
@@ -8,6 +8,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     this.scene.add.existing(this);
     this.displayWidth = 100;
     this.displayHeight = 100;
+    this.name = name
 
     this.experience = 0;
     this.level = Math.round(((Math.sqrt(25 + 10 * this.experience) - 5) / 10));
@@ -44,9 +45,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
   update() {
 
     const speed = 2.5;
-    // if (this.scene.text != null) {
-    //   this.scene.text.destroy();
-    // }
     const playerVelocity = new Phaser.Math.Vector2();
     if (this.inputKeys.left.isDown) {
       playerVelocity.x = -1;
@@ -64,9 +62,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
       this.anims.play('mainchar_walk', true);
-      // this.scene.text = this.scene.add.text(this.x - 40, this.y - 30, `Lvl: ${this.level} HP: ${this.hp}`, { fontSize: 12 });
     } else if (this.inputKeys.attack.isDown) {
-      // this.scene.text = this.scene.add.text(this.x - 40, this.y - 30, `Lvl: ${this.level} HP: ${this.hp}`, { fontSize: 12 });
       this.anims.play('mainchar_attack', true);
       this.scene.monsters.forEach((monster) => {
         if (Math.abs(this.x - monster.x) < 40 && Math.abs(this.y - monster.y) < 40) {
@@ -88,7 +84,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }
       });
     } else {
-      // this.scene.text = this.scene.add.text(this.x - 40, this.y - 30, `Lvl: ${this.level} HP: ${this.hp}`, { fontSize: 12 });
       this.anims.play('mainchar_idle', true);
     }
     if (this.playerFollowText != null && this.playerFollowText != undefined) {
@@ -96,5 +91,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
       this.playerFollowText.setText(`HP: ${this.hp} Level: ${this.level}`);
     }
   }
+
+
 
 }

@@ -27,5 +27,6 @@ export default class Button extends Phaser.GameObjects.Container {
     });
 
     this.scene.add.existing(this);
+
   }
 }

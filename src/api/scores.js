@@ -21,7 +21,6 @@ const addScore = async (name, score, id = 'Bg6e1LV2AJbqKbHyj5ej') => {
                 "user": name,
                 "score": score
             }),
-            // mode: 'cors',
         })
         return data = await response.json()
 
@@ -38,10 +37,8 @@ const getScores = async (id = 'Bg6e1LV2AJbqKbHyj5ej') => {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            // mode: 'cors',
         })
         const answer = await response.json()
-        // console.log(getTopScores(answer.result))
         return getTopScores(answer.result)
     } catch (error) {
         return error

@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import Button from '../objects/Button';
-import config from '../config/config';
 import { addScore, getScores } from '../api/scores'
 
 export default class LeaderBoardScene extends Phaser.Scene {
@@ -15,7 +14,6 @@ export default class LeaderBoardScene extends Phaser.Scene {
     create() {
         const getTopScores = async () => {
             const scores = await getScores()
-            console.log(scores)
             let y = 150
             scores.forEach(element => {
 
