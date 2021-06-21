@@ -148,10 +148,9 @@ export default class MainScene extends Phaser.Scene {
         this.gameOverText.visible = false
         this.scoreText = this.add.text(16, 16, "Score: " + this.player.experience, { fontSize: '32px', fill: '#FFF' })
 
-        this.gameRestart = new Button(this, 275, 350, 'blueButton1', 'blueButton2', 'Restart', 'MainScene');
+        this.gameRestart = new Button(this, 275, 350, 'blueButton1', 'blueButton1', 'Restart', 'MainScene');
 
         this.gameRestart.visible = false
-        // this.gameTops.visible = false
     }
 
     update() {

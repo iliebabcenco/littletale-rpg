@@ -24,10 +24,7 @@ const addScore = async (name, score, id = 'zRp5Vbver4eNF1dRN3Zf') => {
                 "score": score
             }),
         })
-        console.log("before data in add Score method")
-        const data = await response.json()
-        console.log(data)
-        return data
+        return data = await response.json()
     } catch (err) {
         return "Error getting data: " + err
     }
@@ -43,7 +40,6 @@ const getScores = async (id = 'zRp5Vbver4eNF1dRN3Zf') => {
             },
         })
         const answer = await response.json()
-        console.log(answer)
         return getTopScores(answer.result)
     } catch (error) {
         return error
