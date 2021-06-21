@@ -11,7 +11,11 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
     }
 
-    create() {
+    create(player) {
+        console.log("create from leaderboard with this player " + player)
+        if (player.experience > 0) {
+            addScore(player.name, player.experience);
+        }
         const getTopScores = async () => {
             const scores = await getScores()
             let y = 150

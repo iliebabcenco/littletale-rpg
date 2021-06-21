@@ -12,7 +12,7 @@ export default class BootScene extends Phaser.Scene {
     this.load.image('blueButton1', blueButton1Img);
     this.load.image('blueButton2', blueButton2Img);
     this.load.html('input', '../assets/form/username_input.html');
-    this.load.image('backgroundImg', '../assets/background.png');
+    this.load.image('backgroundImg', '../assets/1.jpg');
 
   }
 

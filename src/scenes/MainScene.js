@@ -3,17 +3,17 @@ import Monster from '../Monster';
 import Player from '../Player';
 import Button from '../objects/Button';
 import { getName } from '../util/PlayerNameUtil'
-import { addScore } from '../api/scores'
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super('MainScene');
-        this.monsters = [];
-        this.timeEvents = [];
-        this.gameOverCheck = false
+
     }
 
     preload() {
+        this.monsters = [];
+        this.timeEvents = [];
+        this.gameOverCheck = false
         Player.preload(this);
         Monster.preload(this, 'bandit', '../assets/monsters/bandit.png', '../assets/monsters/bandit_atlas.json', 'bandit_anim', '../assets/monsters/bandit_anim.json');
         Monster.preload(this, 'mushroom', '../assets/monsters/mushroom.png', '../assets/monsters/mushroom_atlas.json', 'mushroom_anim', '../assets/monsters/mushroom_anim.json');
@@ -143,12 +143,15 @@ export default class MainScene extends Phaser.Scene {
                 }));
             }
         });
-        this.gameOverText = this.add.text(400, 300, 'Game over!', { fontSize: 36 });
+        this.gameOverText = this.add.text(game.config.width / 2, game.config.width / 2 - 100, 'Game over! Your Score: ' + this.player.experience, { fontSize: '32px', fill: '#FFF' });
         this.gameOverText.setOrigin(0.5)
         this.gameOverText.visible = false
-        this.scoreText = this.add.text(16, 16, "Score: " + this.player.experience, { fontSize: '32px', fill: '#000' })
-        this.gameRestart = new Button(this, 400, 350, 'blueButton1', 'blueButton2', 'Restart', 'MainScene');
+        this.scoreText = this.add.text(16, 16, "Score: " + this.player.experience, { fontSize: '32px', fill: '#FFF' })
+
+        this.gameRestart = new Button(this, 275, 350, 'blueButton1', 'blueButton2', 'Restart', 'MainScene');
+
         this.gameRestart.visible = false
+        // this.gameTops.visible = false
     }
 
     update() {
@@ -161,6 +164,9 @@ export default class MainScene extends Phaser.Scene {
             this.player.update();
         }
         this.scoreText = this.scoreText.setText("Score: " + this.player.experience)
+        if (this.gameOverCheck) {
+
+        }
     }
 
     updateAudio() {
@@ -179,19 +185,10 @@ export default class MainScene extends Phaser.Scene {
     gameOver() {
         this.player.setTint(0xff0000)
         this.player.anims.play('mainchar_death', true);
-        this.gameOverCheck = false
+        this.gameTops = new Button(this, 475, 350, 'blueButton1', 'blueButton2', 'Scores', 'LeaderBoard', this.player);
         this.gameOverText.visible = true
+        this.gameOverText.setText('Game over! Your Score: ' + this.player.experience);
+        this.gameTops.visible = true
         this.gameRestart.visible = true
-        this.scene.pause()
-        this.monsters.forEach((monster) => {
-            monster.destroy();
-        });
-        this.player.destroy()
-
-        const scoringCall = async () => await addScore(this.player.name, this.player.experience)
-
-        scoringCall()
-        setTimeout(this.scene.start('LeaderBoard'), 5000)
-
     }
 }
