@@ -23,7 +23,6 @@ class Game extends Phaser.Game {
     const model = new Model();
     this.globals = { model, bgMusic: null };
   }
-
 }
 
 window.game = new Game();

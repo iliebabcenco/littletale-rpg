@@ -1,11 +1,9 @@
-let playerName = 'unnamed'
+let playerName = 'unnamed';
 
 const setName = (receivedName) => {
-    playerName = receivedName
-}
+  playerName = receivedName;
+};
 
-const getName = () => {
-    return playerName
-}
+const getName = () => playerName;
 
-export { setName, getName }
+export { setName, getName };

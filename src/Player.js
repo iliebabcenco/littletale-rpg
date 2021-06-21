@@ -1,6 +1,5 @@
-
 export default class Player extends Phaser.Physics.Matter.Sprite {
-  constructor(data, name = "unnamed") {
+  constructor(data, name = 'unnamed') {
     const {
       scene, x, y, texture, frame,
     } = data;
@@ -8,7 +7,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     this.scene.add.existing(this);
     this.displayWidth = 100;
     this.displayHeight = 100;
-    this.name = name
+    this.name = name;
 
     this.experience = 0;
     this.level = Math.round(((Math.sqrt(25 + 10 * this.experience) - 5) / 10));
@@ -43,7 +42,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-
     const speed = 2.5;
     const playerVelocity = new Phaser.Math.Vector2();
     if (this.inputKeys.left.isDown) {
@@ -91,7 +89,4 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
       this.playerFollowText.setText(`HP: ${this.hp} Level: ${this.level}`);
     }
   }
-
-
-
 }
