@@ -7,7 +7,7 @@ import TitleScene from './scenes/TitleScene';
 import OptionsScene from './scenes/OptionsScene';
 import CreditsScene from './scenes/CreditsScene';
 import Model from './Classes/Model';
-import { setGame } from './api/scores'
+import LeaderBoardScene from './scenes/LeaderBoardScene';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -15,6 +15,7 @@ class Game extends Phaser.Game {
     this.scene.add('Boot', BootScene);
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Title', TitleScene);
+    this.scene.add('LeaderBoard', LeaderBoardScene);
     this.scene.add('Options', OptionsScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('Main', MainScene);
@@ -24,7 +25,5 @@ class Game extends Phaser.Game {
   }
 
 }
-
-// setGame()
 
 window.game = new Game();

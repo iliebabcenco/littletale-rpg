@@ -10,7 +10,7 @@ const getTopScores = (object) => {
 };
 
 
-const addScore = async (name, score, id = 'SRxeGp2FFCVlaqwGJEgs') => {
+const addScore = async (name, score, id = 'Bg6e1LV2AJbqKbHyj5ej') => {
     try {
         const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`, {
             method: 'POST',
@@ -23,14 +23,14 @@ const addScore = async (name, score, id = 'SRxeGp2FFCVlaqwGJEgs') => {
             }),
             // mode: 'cors',
         })
-        return list = await response.json()
+        return data = await response.json()
 
     } catch (err) {
         return "Error getting data: " + err
     }
 }
 
-const getScores = async (id = 'SRxeGp2FFCVlaqwGJEgs') => {
+const getScores = async (id = 'Bg6e1LV2AJbqKbHyj5ej') => {
     try {
         const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`, {
             method: 'GET',
@@ -41,7 +41,8 @@ const getScores = async (id = 'SRxeGp2FFCVlaqwGJEgs') => {
             // mode: 'cors',
         })
         const answer = await response.json()
-        return getTopScores(answer)
+        // console.log(getTopScores(answer.result))
+        return getTopScores(answer.result)
     } catch (error) {
         return error
     }

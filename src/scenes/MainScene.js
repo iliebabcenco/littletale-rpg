@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import Monster from '../Monster';
 import Player from '../Player';
 import Button from '../objects/Button';
+import { addScore, getScores } from '../api/scores'
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -177,10 +178,10 @@ export default class MainScene extends Phaser.Scene {
     gameOver() {
         this.player.setTint(0xff0000)
         this.player.anims.play('mainchar_death', true);
-
         this.gameOverCheck = false
         this.gameOverText.visible = true
         this.gameRestart.visible = true
-
+        this.scene.pause()
+        // addScore("new name", this.player.experience)
     }
 }
