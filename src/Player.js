@@ -10,7 +10,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     this.displayWidth = 100;
     this.displayHeight = 100;
     this.name = name;
-
     this.experience = 0;
     this.level = Math.round(((Math.sqrt(25 + 10 * this.experience) - 5) / 10));
     this.power = (this.level * 1.05) + 15;
