@@ -1,7 +1,11 @@
 let playerName = 'unnamed';
 
 const setName = (receivedName) => {
-  playerName = receivedName;
+  if (receivedName === '' || typeof receivedName !== 'string') {
+    playerName = 'unnamed';
+  } else {
+    playerName = receivedName;
+  }
 };
 
 const getName = () => playerName;

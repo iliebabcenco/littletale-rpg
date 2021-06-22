@@ -21,7 +21,7 @@ const addScore = async (name, score, id = 'zRp5Vbver4eNF1dRN3Zf') => {
       },
       body: JSON.stringify({
         user: name,
-        score: score,
+        score,
       }),
     });
     const data = await response.json();
