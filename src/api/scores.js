@@ -9,9 +9,6 @@ const getTopScores = (object) => {
   return sortedArr.slice(0, 8);
 };
 
-// lmd2CLWauEltL5CJQXu8
-// zRp5Vbver4eNF1dRN3Zf
-
 const addScore = async (name, score, id = 'zRp5Vbver4eNF1dRN3Zf') => {
   try {
     const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${id}/scores/`, {

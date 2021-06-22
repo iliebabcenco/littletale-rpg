@@ -16,7 +16,16 @@ This is a JavaScript capstone project from Microverse curriculum. It is a real t
 11. There is a leaderboard where players can compete gaining experience from killing monsters;
 12. The game can be finished in 3 ways: main char death, killing all monsters, restart etc.
 
-P.S. Wanna mention that the battle system was fully implemented by me.
+P.S. I want to mention that the battle system was fully implemented by me.
+
+## How to play
+
+Use next keys for playing:
+W - move main character up
+S - move main character down
+D - move main character right
+A - move main character left
+SPACE - hold for main character attack
 
 ## Built With
 
