@@ -6,7 +6,7 @@ This is a JavaScript capstone project from Microverse curriculum. It is a real t
 1. The player can control the main character on the map;
 2. The main goal is to kill monsters using that character;
 3. By killing monsters main character gains experience;
-4. Based on experience main char level is increasing;
+4. Based on experience main char level is increasing using next formula: `Math.round(((Math.sqrt(25 + 10 * experience) - 5) / 10))`;
 5. Main char has states like: attack, hp, experience, attack radius which can change if the main char is increasing the level;
 6. Monsters on the map are moving randomly and randomly time;
 7. Each monster has its own states like: hp, attack, experience for killing, attack radius;
@@ -15,6 +15,8 @@ This is a JavaScript capstone project from Microverse curriculum. It is a real t
 10. The experience of the player is stored in an API;
 11. There is a leaderboard where players can compete gaining experience from killing monsters;
 12. The game can be finished in 3 ways: main char death, killing all monsters, restart etc.
+
+P.S. Wanna mention that the battle system was fully implemented by me.
 
 ## Built With
 
