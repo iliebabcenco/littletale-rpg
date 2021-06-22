@@ -1,11 +1,4 @@
 import Phaser from 'phaser';
-import backgroundImg from '../../assets/background.png';
-import blueButton1Img from '../../assets/ui/blue_button02.png';
-import blueButton2Img from '../../assets/ui/blue_button03.png';
-import boxImg from '../../assets/ui/grey_box.png';
-import checkedBoxImg from '../../assets/ui/blue_boxCheckmark.png';
-import playMusic from '../../assets/ui/volume.png';
-import muteMusic from '../../assets/ui/mute.png';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -17,11 +10,17 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('blueButton1', blueButton1Img);
-    this.load.image('blueButton2', blueButton2Img);
-    this.load.image('tiles', '../assets/textures/summer.png');
-    this.load.tilemapTiledJSON('map', '../assets/textures/map.json');
+    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
+    this.load.image('tiles', 'assets/textures/summer.png');
+    this.load.tilemapTiledJSON('map', 'assets/textures/map.json');
+    this.load.image('backgroundImg', 'assets/background.png');
     this.add.image(380, 250, 'backgroundImg');
+    this.load.image('playMusic', 'assets/ui/volume.png');
+    this.load.image('muteMusic', 'assets/ui/mute.png');
+    this.load.image('box', 'assets/ui/grey_box.png');
+    this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
+    this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
 
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
@@ -87,15 +86,6 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     this.timedEvent = this.time.delayedCall(4000, this.ready, [], this);
-
-    this.load.image('backgroundImg', backgroundImg);
-    this.load.image('blueButton1', blueButton1Img);
-    this.load.image('blueButton2', blueButton2Img);
-    this.load.image('playMusic', playMusic);
-    this.load.image('muteMusic', muteMusic);
-    this.load.image('box', boxImg);
-    this.load.image('checkedBox', checkedBoxImg);
-    this.load.audio('bgMusic', ['assets/TownTheme.mp3']);
   }
 
   ready() {

@@ -1,6 +1,4 @@
 import Phaser from 'phaser';
-import blueButton1Img from '../../assets/ui/blue_button02.png';
-import blueButton2Img from '../../assets/ui/blue_button03.png';
 import { setName } from '../util/PlayerNameUtil';
 
 export default class BootScene extends Phaser.Scene {
@@ -9,10 +7,10 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('blueButton1', blueButton1Img);
-    this.load.image('blueButton2', blueButton2Img);
-    this.load.html('input', '../assets/form/username_input.html');
-    this.load.image('backgroundImg', '../assets/1.jpg');
+    this.load.image('blueButton1', 'assets/ui/blue_button02.png');
+    this.load.image('blueButton2', 'assets/ui/blue_button03.png');
+    this.load.html('input', 'assets/form/username_input.html');
+    this.load.image('backgroundImg', 'assets/1.jpg');
   }
 
   create() {

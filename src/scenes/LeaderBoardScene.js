@@ -12,10 +12,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
       addScore(player.name, player.experience);
     }
     player.experience = 0;
-  }
-
-  preload() {
-
+    this.text = this.add.text(250, 100, 'Leaderboard: ', { fontSize: 40 });
   }
 
   create() {
@@ -29,7 +26,6 @@ export default class LeaderBoardScene extends Phaser.Scene {
         y += 40;
       });
     };
-    this.text = this.add.text(250, 100, 'Leaderboard: ', { fontSize: 40 });
     getTopScores();
     this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
   }

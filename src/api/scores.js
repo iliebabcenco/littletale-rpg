@@ -24,7 +24,8 @@ const addScore = async (name, score, id = 'zRp5Vbver4eNF1dRN3Zf') => {
         score,
       }),
     });
-    return data = await response.json();
+    const data = await response.json();
+    return data;
   } catch (err) {
     return `Error getting data: ${err}`;
   }

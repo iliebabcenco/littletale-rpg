@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 export default class Player extends Phaser.Physics.Matter.Sprite {
   constructor(data, name = 'unnamed') {
     const {
@@ -33,8 +35,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
   }
 
   static preload(scene) {
-    scene.load.atlas('mainchar', '../assets/maincharacter/main/mainchar.png', '../assets/maincharacter/main/mainchar_atlas.json');
-    scene.load.animation('mainchar_anim', '../assets/maincharacter/main/mainchar_anim.json');
+    scene.load.atlas('mainchar', 'assets/maincharacter/main/mainchar.png', 'assets/maincharacter/main/mainchar_atlas.json');
+    scene.load.animation('mainchar_anim', 'assets/maincharacter/main/mainchar_anim.json');
   }
 
   get velocity() {
@@ -64,7 +66,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.play('mainchar_attack', true);
       this.scene.monsters.forEach((monster) => {
         if (Math.abs(this.x - monster.x) < 40 && Math.abs(this.y - monster.y) < 40) {
-          monster.stats.hp = monster.stats.hp - this.power;
+          monster.stats.hp -= this.power;
           if (monster.stats.hp <= 0) {
             this.experience += monster.stats.exp;
             this.scene.timeEvents[this.scene.monsters.indexOf(monster)].remove(false);
@@ -84,7 +86,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     } else {
       this.anims.play('mainchar_idle', true);
     }
-    if (this.playerFollowText != null && this.playerFollowText != undefined) {
+    if (this.playerFollowText !== null && this.playerFollowText !== undefined) {
       this.playerFollowText.setPosition(this.x - 30, this.y - 20);
       this.playerFollowText.setText(`HP: ${this.hp} Level: ${this.level}`);
     }

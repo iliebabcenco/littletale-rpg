@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 export default class Monster extends Phaser.Physics.Matter.Sprite {
   constructor(data, stats) {
     const {
@@ -18,9 +20,9 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
   }
 
-  static preload(scene, name, image, atlas_json, anim_name, anim_json) {
-    scene.load.atlas(name, image, atlas_json);
-    scene.load.animation(anim_name, anim_json);
+  static preload(scene, name, image, atlasJson, animName, animJson) {
+    scene.load.atlas(name, image, atlasJson);
+    scene.load.animation(animName, animJson);
   }
 
   get velocity() {
@@ -28,7 +30,7 @@ export default class Monster extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
-    if (this.followText != null && this.followText != undefined) {
+    if (this.followText !== null && this.followText !== undefined) {
       this.followText.setPosition(this.x - 20, this.y - 20);
       this.followText.setText(`HP: ${this.stats.hp}`);
     }
