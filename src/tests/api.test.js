@@ -29,14 +29,14 @@ test('receive object data', () => {
 
 test('fail to receive object data', () => {
   getScores('wrong key').then((data) => {
-    expect(data).toHaveLength(0);
+    expect(data).not.toBe('object');
   });
 });
 
 test('fail to post data, without username as parameter', () => {
   addScore().then((data) => {
-    expect(data).toEqual({
-      message: 'You need to provide a valid user for the score',
+    expect(data).not.toEqual({
+      message: 'Leaderboard score created correctly.',
     });
   });
 });
