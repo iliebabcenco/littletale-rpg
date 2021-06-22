@@ -21,11 +21,11 @@ P.S. I want to mention that the battle system was fully implemented by me.
 ## How to play
 
 Use next keys for playing:
-W - move main character up
-S - move main character down
-D - move main character right
-A - move main character left
-SPACE - hold for main character attack
+- W - move main character up
+- S - move main character down
+- D - move main character right
+- A - move main character left
+- SPACE - hold for main character attack
 
 ## Built With
 
