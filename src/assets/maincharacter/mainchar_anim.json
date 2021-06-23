@@ -1,0 +1,56 @@
+{
+    "anims": [
+        {
+            "key": "mainchar_walk",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "mainchar",
+                    "frame": "herald_walk_1"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_walk_2"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_walk_3"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_walk_4"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_idle_1"
+                }
+            ]
+        },
+        {
+            "key": "mainchar_idle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "mainchar",
+                    "frame": "herald_idle_1"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_idle_2"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_idle_3"
+                },
+                {
+                    "key": "mainchar",
+                    "frame": "herald_idle_4"
+                }
+            ]
+        }
+    ]
+}
